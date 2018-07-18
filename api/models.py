@@ -1,5 +1,8 @@
 from django.db import models
 class BukuTamu(models.Model):
+    #field2 yang di inisialisasi
+    #jangan lupa abis di inisialisasi ketik python manage.py makemigrations
+    #maka file migration akan terbuat auto dan setelah itu baru migrate
     created = models.DateTimeField(auto_now_add=True)
     nama = models.CharField(max_length=100, blank=True, default='')
     alamat = models.TextField()
