@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Face Detection</title>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+    
+        <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.min.css" %}">
+        <style>
+         img:hover{
+                -webkit-box-shadow: 2px 2px 21px 0px rgba(0, 3, 0, 0.91);
+                -moz-box-shadow:    2px 2px 21px 0px rgba(0, 3, 0, 0.91);
+                box-shadow:         2px 2px 21px 0px rgba(0, 3, 0, 0.91);
+                border:2px solid #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+          <center><h1>Cek Data anda berdasarkan wajah</h1></center>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/"><img class="img-responsive" src="{% static "images/OpenCamera1.png" %}" style="width: 300px;height: 300px"></a>
+                    <h4 class="text-center">Deteksi Wajah Anda</h4>
+                </div>
+                <div class="col-md-4">
+                        <a href="/"><img class="img-responsive" src="{% static "images/ai.jpg" %}"  style="width: 300px;height: 300px"></a>
+                        <h4 class="text-center">Latih AI</h4>
+                </div>
+                <div class="col-md-4">
+                  <button type="button" style="background:transparent;border:none" data-toggle="modal" data-target="#myModal">
+                        <img src="{% static 'images/newfolder.png' %}" class="img-responsive" style="width: 300px;height: 300px"/>
+                        <h4 class="text-center">Ambil Gambar Anda</h4>
+                    </button>
+                </div>
+            </div>
+            <div class="col-xs-12 text-center"> 
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Daftar Buku Tamu!</button> 
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Input unique id and wait for webcam</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                        <li>For higher accuracy, make sure to stay in room with good lightning.</li>
+                        <li>Please remove any type of accesories from face.</li>
+                        <li>Make sure your face in clearly visible in camera.</li>
+                        <li>Make sure your hair is not blocking the face.</li>
+                        <li>Make sure no other faces are within the cam frame.
+                        </ul>
+                        <hr/>
+                        <form action="/create_dataset" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="inputId">Enter Unique ID*</label>
+                            <input type="text" class="form-control" name="userId" id="inputId" placeholder="Enter Id">
+                        </div>
+                        <button type="submit" class="btn btn-warning">Submit</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="{%static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{%static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+</html>
