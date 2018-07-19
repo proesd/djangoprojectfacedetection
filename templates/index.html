@@ -3,7 +3,7 @@
         <title>Face Detection</title>
         {% load static %}
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
     
@@ -22,11 +22,11 @@
           <center><h1>Cek Data anda berdasarkan wajah</h1></center>
             <div class="row">
                 <div class="col-md-4">
-                    <a href="/"><img class="img-responsive" src="{% static "images/OpenCamera1.png" %}" style="width: 300px;height: 300px"></a>
+                    <a href="/api/detect"><img class="img-responsive" src="{% static "images/OpenCamera1.png" %}" style="width: 300px;height: 300px"></a>
                     <h4 class="text-center">Deteksi Wajah Anda</h4>
                 </div>
                 <div class="col-md-4">
-                        <a href="/"><img class="img-responsive" src="{% static "images/ai.jpg" %}"  style="width: 300px;height: 300px"></a>
+                        <a href="/api/train"><img class="img-responsive" src="{% static "images/ai.jpg" %}"  style="width: 300px;height: 300px"></a>
                         <h4 class="text-center">Latih AI</h4>
                 </div>
                 <div class="col-md-4">
@@ -37,15 +37,15 @@
                 </div>
             </div>
             <div class="col-xs-12 text-center"> 
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Daftar Buku Tamu!</button> 
+                <a href="/admin" id="singlebutton" name="singlebutton" class="btn btn-primary" >Daftar Buku Tamu!</a> 
             </div>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal" id="myModal">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Input unique id and wait for webcam</h4>               
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Input unique id and wait for webcam</h4>
-                    </div>
+                     </div>
                     <div class="modal-body">
                         <ul>
                         <li>For higher accuracy, make sure to stay in room with good lightning.</li>
@@ -55,7 +55,7 @@
                         <li>Make sure no other faces are within the cam frame.
                         </ul>
                         <hr/>
-                        <form action="/create_dataset" method="POST">
+                        <form action="/api/create_dataset" method="POST">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="inputId">Enter Unique ID*</label>
@@ -64,6 +64,47 @@
                         <button type="submit" class="btn btn-warning">Submit</button>
                         </form>
                     </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="myModal1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    <form action="/api/bukutamu" method="POST" >
+                        {% csrf_token %}
+                       <div class="form-group">
+                            <label>ID(berapa aja)</label>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input class="form-control" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Nomor Telpon</label>
+                            <input class="form-control" type="text">
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
                     </div>
                 </div>
             </div>

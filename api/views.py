@@ -16,9 +16,7 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 import pickle
 from rest_framework import viewsets
-class BukuTamuViews(viewsets.ModelViewSet):
-    queryset = BukuTamu.objects.all()
-    serializer_class = BukuTamuSeliazers
+from .models import BukuTamu
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -31,7 +29,7 @@ def create_dataset(request):
     print (cv2.__version__)
     # Detect face
     #Creating a cascade image classifier
-    faceDetect = cv2.CascadeClassifier('ml/haarcascade_frontalface_default.xml')
+    faceDetect = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
     #camture images from the webcam and process and detect the face
     # takes video capture id, for webcam most of the time its 0.
     cam = cv2.VideoCapture(0)
@@ -150,7 +148,7 @@ def trainer(request):
 
 
 def detect(request):
-    faceDetect = cv2.CascadeClassifier('ml/haarcascade_frontalface_default.xml')
+    faceDetect = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
 
     cam = cv2.VideoCapture(0)
     # creating recognizer
@@ -186,7 +184,7 @@ def detect(request):
             cv2.waitKey(1000)
             cam.release()
             cv2.destroyAllWindows()
-            return redirect('records/details/'+str(userId))
+            return redirect('details/'+str(userId))
 
     cam.release()
     cv2.destroyAllWindows()
@@ -240,4 +238,11 @@ def detectImage(request):
     print(svm_model.best_estimator_)
     print (pred[0])
 
-    return redirect('records/details/'+str(pred[0]))
+    return redirect('details/'+str(pred[0]))
+
+def details(request, id):
+    record = BukuTamu.objects.get(uid=id)
+    context = {
+        'record' : record
+    }
+    return render(request, 'details.html', context)
