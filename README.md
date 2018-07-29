@@ -23,8 +23,9 @@ Step dibawah ini dicoba pada Ubuntu 18.04 LTS, python 3.6, database mysql:
 2. Isikan sesuai dengan konfigurasi database kalian
 3. Lakukan ```python3 manage.py migrate```
 4. Jika ada error ```no module tkinter```, lakukan install tkinter ```sudo apt-get install python3-tk```
-5. Jika migrasi sukses dilakukan lakukan ```python3 manage.py runserver```, cek dimana listen port yang dipakai
+5. Buat folder media di pada bagian root folder
+6. Jika migrasi sukses dilakukan lakukan ```python3 manage.py runserver```, cek dimana listen port yang dipakai
 
 ### Windows
 
-MASIH MENCARI ORANG YANG MAU BUAT DI WINDOWS
+Windows Here
