@@ -1,0 +1,22 @@
+{
+  "name": "django",
+  "homepage": "https://github.com/proesd/djangoprojectfacedetection",
+  "authors": [
+    "forked project"
+  ],
+  "description": "django project",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "jquery": "^3.3.1"
+  }
+}
