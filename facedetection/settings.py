@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import environ
+root = environ.Path(__file__) - 2 # three folder back (/a/b/c/ - 3 = /)
+env = environ.Env(DEBUG=(bool, False),) # set default values and casting
+environ.Env.read_env('.env') # reading .env file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = root()
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +27,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'z$b%eekpwmy_-8_15*0m^44xenoi8=os+3=gj)5=q^0n&8ms6h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['localhost','34ca8b09.ngrok.io']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 
 # Application definition
@@ -58,11 +62,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
     'localhost:8080',
-    'localhost:8000'
+    'localhost:8000',
 )
 CORS_ORIGIN_REGEX_WHITELIST = (
     'localhost:8080',
-    'localhost:8000'
+    'localhost:8000',
 )
 CORS_URLS_REGEX = r'^/api/.*$'
 CORS_ALLOW_METHODS = (
@@ -111,11 +115,11 @@ WSGI_APPLICATION = 'facedetection.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'facedetectionproject',
-        'HOST' :'localhost',
-        'USER' :'root',
-        'PASSWORD':'',
-        'PORT':'3306'
+        'NAME': env("DB_NAME"),
+        'HOST' : env("DB_HOST"),
+        'USER' : env("DB_USER"),
+        'PASSWORD': env("DB_PASS"),
+        'PORT': env("DB_PORT")
     }
 }
 
