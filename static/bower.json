@@ -1,10 +1,10 @@
 {
-  "name": "django",
+  "name": "Django Project",
   "homepage": "https://github.com/proesd/djangoprojectfacedetection",
   "authors": [
-    "forked project"
+    "Forked Project"
   ],
-  "description": "django project",
+  "description": "Django Project Face Detection",
   "main": "",
   "license": "MIT",
   "private": true,

@@ -111,3 +111,4 @@ ENV/
 .mypy_cache/
 media/
 bower_components
+.vscode/
